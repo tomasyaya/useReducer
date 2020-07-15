@@ -1,28 +1,9 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Main from "../view/Main/Main";
-import {
-  initialState,
-  todoReducer,
-  NEW_TODO,
-  ADD_TODO,
-} from "../reducers/todoReducer";
+import { useTodos } from "../hooks/useTodos";
 
 const MainCt = () => {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
-  const handleChange = ({ target }) => {
-    dispatch({
-      type: NEW_TODO,
-      payload: {
-        [target.name]: target.value,
-      },
-    });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({
-      type: ADD_TODO,
-    });
-  };
+  const { state, handleSubmit, handleChange } = useTodos();
   return (
     <Main
       handleSubmit={handleSubmit}
